@@ -8,4 +8,5 @@ const router = express_1.default.Router();
 const mainController_1 = __importDefault(require("../controllers/mainController"));
 router.get("/", mainController_1.default.getIndex);
 router.post("/dinner", mainController_1.default.postDinner);
+router.post("/rate", mainController_1.default.postRate);
 exports.default = router;

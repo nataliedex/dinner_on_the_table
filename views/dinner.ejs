@@ -12,6 +12,11 @@
         <div class="card-header bg-success text-white">
             Dinner Table Conversation Starter
         </div>
+        <form action="/rate" method="POST" class="mt-3">
+            <input type="hidden" name="mealId" value="<%= mealId %>">
+            <button type="submit" name="thumbsUp" value="true" class="btn btn-success">👍</button>
+            <button type="submit" name="thumbsUp" value="false" class="btn btn-danger">👎</button>
+          </form>
         <div class="card-body">
             <p><%= conversationStarter %></p>
         </div>

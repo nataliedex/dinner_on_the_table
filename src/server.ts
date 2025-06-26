@@ -1,11 +1,14 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
+import connectDB from "./config/database.js";
 import mainRoutes from "./route/mainRoutes"
 
 dotenv.config();
 
 const app = express();
+
+connectDB();
 
 // Using EJS for views
 app.set("view engine", "ejs");

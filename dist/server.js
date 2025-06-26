@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const database_js_1 = __importDefault(require("./config/database.js"));
 const mainRoutes_1 = __importDefault(require("./route/mainRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+(0, database_js_1.default)();
 // Using EJS for views
 app.set("view engine", "ejs");
 app.set("views", path_1.default.join(__dirname, "../views"));

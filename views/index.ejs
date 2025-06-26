@@ -27,7 +27,17 @@
         </div>
         
         <button type="submit" class="btn btn-primary">Get Dinner Idea</button>
+
     </form>
+
+    <div class="mb-3">
+        <div class="card-header bg-success text-white">Dinners We've Enjoyed</div>
+            <ul>
+                <% meals.forEach(meal => {  %>
+                    <li><%= meal.recipe %></li>
+                <% }) %>
+            </ul>
+    </div>
 </div>
 
 
