@@ -1,0 +1,22 @@
+<%- include('partials/header') -%>
+<h1>What’s for Dinner?</h1>
+<form action="/dinner" method="POST">
+    <input type="text" name="ingredients" id="ingredients" placeholder="e.g. chicken, broccoli" required />
+        <select name="style">
+            <option value="quick">Quick</option>
+            <option value="healthy">Healthy</option>
+            <option value="comfort">Comfort</option>
+            <option value="kid-friendly">Kid-Friendly</option>
+            <option value="gourmet">Gourmet</option>
+        </select>
+    <button type="submit">Get Dinner Idea</button>
+</form>
+
+<% if(result) { %>
+    <hr />
+    <h2>Dinner Suggestion:</h2>
+    <pre><%= result %></pre>
+<% } %>
+
+
+<%- include('partials/footer') -%>
