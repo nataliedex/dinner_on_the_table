@@ -14,30 +14,20 @@
                 <option value="comfort">Comfort</option>
                 <option value="kid-friendly">Kid-Friendly</option>
                 <option value="gourmet">Gourmet</option>
+                <option value="mix">Mix</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">How many dinners?</label>
+            <select name="duration">
+                <option value="one">Just one dinner</option>
+                <option value="week">Plan the whole week</option>
             </select>
         </div>
         
         <button type="submit" class="btn btn-primary">Get Dinner Idea</button>
     </form>
-
-    <% if(recipe){ %>
-    <h1 class="md-4">What’s for Dinner?</h1>
-
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">Recipe</div>
-        <div class="card-body"><pre><%= recipe %></pre></div>
-    </div>
-
-    <div class="card shadow-sm">
-        <div class="card-header bg-success text-white">
-            Dinner Table Conversation Starter
-        </div>
-        <div class="card-body">
-            <p><%= conversationStarter %></p>
-        </div>
-    </div>
-    <a href="/" class="btn btn-outline-primary mt-4">Plan Another Dinner</a>
-    <% } %>
 </div>
 
 

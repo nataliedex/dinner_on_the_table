@@ -1,0 +1,22 @@
+<%- include('partials/header') -%>
+
+<% if(recipe){ %>
+    <h1 class="md-4">What’s for Dinner?</h1>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">Recipe</div>
+        <div class="card-body"><pre><%= recipe %></pre></div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            Dinner Table Conversation Starter
+        </div>
+        <div class="card-body">
+            <p><%= conversationStarter %></p>
+        </div>
+    </div>
+    <a href="/" class="btn btn-outline-primary mt-4">Plan Another Dinner</a>
+    <% } %>
+
+<%- include('partials/footer') -%>

@@ -28,7 +28,11 @@ async function getDinnerIdea(ingredients, style) {
     Conversation Starter:
     [...]
 
+    Pull the recipes from popular websites like pinchofyum.com, thedefineddish.com, halfbakedharvest.com, thekitchn.com, rachlmansfield.com, cooking.nytimes.com,
+    
     if the ${ingredients} is blank, give a recipe based off of the ${style} only.
+
+    
     
     `;
     const response = await openai.chat.completions.create({
