@@ -11,7 +11,26 @@ const openai = new openai_1.default({
     apiKey: process.env.OPENAI_API_KEY,
 });
 async function getDinnerIdea(ingredients, style) {
-    const userPrompt = `I have: ${ingredients}.  I want a ${style} dinner.  Suggest a recipe with instructions and a fun dinner table conversation starter`;
+    const userPrompt = `
+    I have: ${ingredients}.  
+    I want a ${style} dinner. 
+    
+    Please provide your answer in two parts: 
+    1) Recipe with instructions
+    2) Dinner table conversation starter
+
+    Separate these two part clearly, for example with labels "Recipe:" and "Conversation Starters:".
+    
+    User exactly these headings:
+
+    Recipe: 
+    [...]
+    Conversation Starter:
+    [...]
+
+    if the ${ingredients} is blank, give a recipe based off of the ${style} only.
+    
+    `;
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
         messages: [

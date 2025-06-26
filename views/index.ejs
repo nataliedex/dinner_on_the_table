@@ -3,7 +3,7 @@
     <form action="/dinner" method="POST" class="mb-5">
         <div class="mb-3">
             <label for="ingredients" class="form-label">Ingredients you have</label>
-            <input type="text" name="ingredients" id="ingredients" placeholder="e.g. chicken, broccoli" required />
+            <input type="text" name="ingredients" id="ingredients" placeholder="e.g. chicken, broccoli" />
         </div>
 
         <div class="mb-3">
@@ -20,6 +20,7 @@
         <button type="submit" class="btn btn-primary">Get Dinner Idea</button>
     </form>
 
+    <% if(recipe){ %>
     <h1 class="md-4">What’s for Dinner?</h1>
 
     <div class="card mb-4 shadow-sm">
@@ -36,6 +37,7 @@
         </div>
     </div>
     <a href="/" class="btn btn-outline-primary mt-4">Plan Another Dinner</a>
+    <% } %>
 </div>
 
 

@@ -12,11 +12,21 @@ export async function getDinnerIdea(ingredients: string, style: string) {
     I have: ${ingredients}.  
     I want a ${style} dinner. 
     
-    Please provide your answer in tow part: 
+    Please provide your answer in two parts: 
     1) Recipe with instructions
     2) Dinner table conversation starter
 
     Separate these two part clearly, for example with labels "Recipe:" and "Conversation Starters:".
+    
+    User exactly these headings:
+
+    Recipe: 
+    [...]
+    Conversation Starter:
+    [...]
+
+    if the ${ingredients} is blank, give a recipe based off of the ${style} only.
+    
     `;
 
     const response = await openai.chat.completions.create({
