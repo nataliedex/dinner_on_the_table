@@ -1,22 +1,42 @@
 <%- include('partials/header') -%>
-<h1>What’s for Dinner?</h1>
-<form action="/dinner" method="POST">
-    <input type="text" name="ingredients" id="ingredients" placeholder="e.g. chicken, broccoli" required />
-        <select name="style">
-            <option value="quick">Quick</option>
-            <option value="healthy">Healthy</option>
-            <option value="comfort">Comfort</option>
-            <option value="kid-friendly">Kid-Friendly</option>
-            <option value="gourmet">Gourmet</option>
-        </select>
-    <button type="submit">Get Dinner Idea</button>
-</form>
+<div class="container py-5">
+    <form action="/dinner" method="POST" class="mb-5">
+        <div class="mb-3">
+            <label for="ingredients" class="form-label">Ingredients you have</label>
+            <input type="text" name="ingredients" id="ingredients" placeholder="e.g. chicken, broccoli" required />
+        </div>
 
-<% if(result) { %>
-    <hr />
-    <h2>Dinner Suggestion:</h2>
-    <pre><%= result %></pre>
-<% } %>
+        <div class="mb-3">
+            <label for="style" class="form-label">Dinner style</label>
+            <select name="style">
+                <option value="quick">Quick</option>
+                <option value="healthy">Healthy</option>
+                <option value="comfort">Comfort</option>
+                <option value="kid-friendly">Kid-Friendly</option>
+                <option value="gourmet">Gourmet</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Get Dinner Idea</button>
+    </form>
+
+    <h1 class="md-4">What’s for Dinner?</h1>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">Recipe</div>
+        <div class="card-body"><pre><%= recipe %></pre></div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            Dinner Table Conversation Starter
+        </div>
+        <div class="card-body">
+            <p><%= conversationStarter %></p>
+        </div>
+    </div>
+    <a href="/" class="btn btn-outline-primary mt-4">Plan Another Dinner</a>
+</div>
 
 
 <%- include('partials/footer') -%>

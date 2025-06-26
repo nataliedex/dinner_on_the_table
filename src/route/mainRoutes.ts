@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import mainController from "../controllers/mainController.js";
+import mainController from "../controllers/mainController";
 
 router.get("/", mainController.getIndex);
 router.post("/dinner", mainController.postDinner);
