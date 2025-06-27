@@ -1,7 +1,19 @@
 import mongoose from "mongoose";
 
 const MealSchema = new mongoose.Schema({
-    recipe: {
+    recipeTitle: {
+        type: String, 
+        required: true,
+    },
+    recipeSource: {
+        type: String, 
+        required: true,
+    },
+    recipeIngredients: {
+        type: String, 
+        required: true,
+    },
+    recipeInstructions: {
         type: String, 
         required: true,
     },

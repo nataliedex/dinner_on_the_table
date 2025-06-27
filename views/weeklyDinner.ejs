@@ -2,19 +2,25 @@
 <div class="container py-5">
   <h1 class="mb-4">Your Weekly Dinner Plan</h1>
 
-  <% dinners.forEach(dinner => { %>
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header bg-info text-white"><%= dinner.title %></div>
-      <div class="card-body">
-        <pre><%= dinner.content %></pre>
-      </div>
-      <form action="/rate" method="POST" class="mt-3">
-        <input type="hidden" name="mealId" value="<%= mealId %>">
-        <button type="submit" name="thumbsUp" value="true" class="btn btn-success">👍</button>
-        <button type="submit" name="thumbsUp" value="false" class="btn btn-danger">👎</button>
-      </form>
-    </div>
-  <% }) %>
+  <table>
+    <tr>
+      <th>Day 1</th>
+      <th>Day 2</th>
+      <th>Day 3</th>
+      <th>Day 4</th>
+      <th>Day 5</th>
+      <th>Day 6</th>
+      <th>Day 7</th>
+    </tr>
+    <tr>
+      <% dinners.forEach(dinner => { %>
+        <td>
+          <a href="/recipe/<%= dinner._id %>"><%= dinner.recipeTitle %></a>
+        </td>
+      <% }) %>
+    </tr>
+  </table>
+
 
   <a href="/" class="btn btn-outline-primary mt-4">Plan Another Dinner</a>
 </div>

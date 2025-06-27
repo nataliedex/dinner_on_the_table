@@ -5,7 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const MealSchema = new mongoose_1.default.Schema({
-    recipe: {
+    recipeTitle: {
+        type: String,
+        required: true,
+    },
+    recipeSource: {
+        type: String,
+        required: true,
+    },
+    recipeIngredients: {
+        type: String,
+        required: true,
+    },
+    recipeInstructions: {
         type: String,
         required: true,
     },

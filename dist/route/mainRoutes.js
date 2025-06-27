@@ -9,4 +9,5 @@ const mainController_1 = __importDefault(require("../controllers/mainController"
 router.get("/", mainController_1.default.getIndex);
 router.post("/dinner", mainController_1.default.postDinner);
 router.post("/rate", mainController_1.default.postRate);
+router.get("/recipe/:id", mainController_1.default.getRecipe);
 exports.default = router;

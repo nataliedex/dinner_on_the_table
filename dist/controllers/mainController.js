@@ -22,26 +22,48 @@ const mainController = {
             const rawResponse = await (0, openai_1.getDinnerIdea)(ingredients, style, duration);
             if (duration === "week") {
                 const days = (rawResponse ?? "").split(/Day \d:/).slice(1);
-                const dinners = days.map((dayText, i) => ({
-                    title: `Day ${i + 1}`,
-                    content: dayText.trim(),
-                }));
-                await Meals_1.default.insertMany(dinners.map(d => ({ recipe: d.content })));
-                res.render("weeklyDinner.ejs", { dinners });
-            }
-            else {
-                const [recipePart, convoPart] = (rawResponse ?? "").split("Conversation Starter:");
-                const cleanedRecipe = recipePart.replace("Recipe:", "").trim();
-                const cleanedConversation = convoPart?.trim() ?? "No conversation starter found.";
-                const savedMeal = await Meals_1.default.create({
-                    recipe: cleanedRecipe,
+                const dinners = days.map((dayText, i) => {
+                    const recipeTitle = dayText.match(/Recipe Title:\s*(.+)/)?.[1]?.trim() ?? `Day ${i + 1}`;
+                    const recipeSource = dayText.match(/Source:\s*(.+)/)?.[1]?.trim() ?? "Unknown";
+                    const recipeIngredients = dayText.match(/Ingredients:\s*([\s\S]*?)Instructions:/)?.[1]?.trim() ?? "Not provided";
+                    const recipeInstructions = dayText.match(/Instructions:\s*([\s\S]*?)Conversation Starter:/)?.[1]?.trim() ?? "Not provided";
+                    const conversationStarter = dayText.match(/Conversation Starter:\s*([\s\S]*)/)?.[1]?.trim() ?? "Enjoy your meal!";
+                    return {
+                        recipeTitle,
+                        recipeSource,
+                        recipeIngredients,
+                        recipeInstructions,
+                        conversationStarter,
+                    };
                 });
-                res.render("dinner.ejs", {
-                    recipe: cleanedRecipe,
-                    conversationStarter: cleanedConversation,
-                    mealId: savedMeal._id.toString(),
-                });
+                const insertedDinners = await Meals_1.default.insertMany(dinners.map(d => ({
+                    recipeTitle: d.recipeTitle,
+                    recipeSource: d.recipeSource,
+                    recipeIngredients: d.recipeIngredients,
+                    recipeInstructions: d.recipeInstructions,
+                })));
+                res.render("weeklyDinner.ejs", { dinners: insertedDinners });
+                return;
             }
+            const recipeTitle = rawResponse?.match(/Recipe Title:\s*(.+)/)?.[1]?.trim() ?? "Untitled";
+            const recipeSource = rawResponse?.match(/Source:\s*(.+)/)?.[1]?.trim() ?? "Unknown";
+            const recipeIngredients = rawResponse?.match(/Ingredients:\s*([\s\S]*?)Instructions:/)?.[1]?.trim() ?? "Not provided";
+            const recipeInstructions = rawResponse?.match(/Instructions:\s*([\s\S]*?)Conversation Starter:/)?.[1]?.trim() ?? "Not provided";
+            const conversationStarter = rawResponse?.match(/Conversation Starter:\s*([\s\S]*)/)?.[1]?.trim() ?? "Enjoy your meal!";
+            const savedMeal = await Meals_1.default.create({
+                recipeTitle,
+                recipeSource,
+                recipeIngredients,
+                recipeInstructions,
+            });
+            res.render("dinner.ejs", {
+                recipeTitle,
+                recipeSource,
+                recipeIngredients,
+                recipeInstructions,
+                conversationStarter,
+                mealId: savedMeal._id.toString(),
+            });
         }
         catch (err) {
             console.error(err);
@@ -59,6 +81,28 @@ const mainController = {
         catch (err) {
             console.error(err);
             res.status(500).send("Error rating meal");
+        }
+    },
+    getRecipe: async (req, res) => {
+        try {
+            const recipe = await Meals_1.default.findById(req.params.id);
+            if (recipe) {
+                const { recipeTitle, recipeSource, recipeIngredients, recipeInstructions, _id } = recipe;
+                res.render("recipe.ejs", {
+                    recipeTitle,
+                    recipeSource,
+                    recipeIngredients,
+                    recipeInstructions,
+                    mealId: _id.toString(),
+                });
+            }
+            else {
+                res.status(404).send("Recipe not found");
+            }
+        }
+        catch (err) {
+            console.error(err);
+            res.status(500).send("Error getting the meal");
         }
     },
 };
