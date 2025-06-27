@@ -9,11 +9,11 @@ const openai = new OpenAI({
 
 export async function getDinnerIdea(ingredients: string, style: string, duration: string) {
     const userPrompt = `
-    I have: ${ingredients}.  
+    I have: ${ingredients}. 
     I want a ${style} dinner.
     I want dinner for ${duration} days. 
 
-    If the ${duration} is a week, please provide a 7-day dinner plan. For each day, include: 
+    If the ${duration} is a week, please provide a diverse 7-day dinner plan. For each day, include: 
 
     - a recipe title with the source
     - the ingredients
@@ -50,7 +50,7 @@ export async function getDinnerIdea(ingredients: string, style: string, duration
 
     Pull the 70% recipes from popular websites like pinchofyum.com, gordonramsay.com, jamieoliver.com, rachaelray.com, barefootcontessa.com, seriouseats.com, smittenkitchen.com, food52.com, thedefineddish.com, halfbakedharvest.com, thekitchn.com, rachlmansfield.com, cooking.nytimes.com and create the other 30% of the recipes with simple to follow instructions.
 
-    if the ${ingredients} is blank, give a recipe based off of the ${style} only.
+    if the ${ingredients} is blank, give a recipe based off of the ${style} only.  The recipes do not need to include all of the ${ingredients}.  You can assume that the user can buy more items for the recipes.  
 
     `;
 
